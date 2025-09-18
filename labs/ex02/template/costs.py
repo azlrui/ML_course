@@ -4,7 +4,7 @@
 import numpy as np
 
 
-def compute_loss(y, tx, w):
+def compute_loss(y:np.array, tx:np.array, w:np.array, method="MSE") -> float:
     """Calculate the loss using either MSE or MAE.
 
     Args:
@@ -19,4 +19,10 @@ def compute_loss(y, tx, w):
     # INSERT YOUR CODE HERE
     # TODO: compute loss by MSE
     # ***************************************************
-    raise NotImplementedError
+    e = y - tx.dot(w)
+    if method == "MSE":
+        return 1 / (2 * len(y)) * np.sum(e ** 2)
+    elif method == "MAE":
+        return 1 / len(y) * np.sum(np.abs(e))
+    else:
+        raise ValueError("Invalid method. Use 'MSE' or 'MAE'.")
