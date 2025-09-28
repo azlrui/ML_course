@@ -1,5 +1,5 @@
 import numpy as np
-from costs import compute_loss
+from .costs import compute_loss
 
 def compute_subgradient_mae(y, tx, w):
     """Compute a subgradient of the MAE at w.

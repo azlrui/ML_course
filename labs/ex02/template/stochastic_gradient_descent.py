@@ -3,9 +3,9 @@
 
 Stochastic Gradient Descent
 """
-from helpers import batch_iter
-from costs import compute_loss
-from gradient_descent import compute_gradient
+from .helpers import batch_iter
+from .costs import compute_loss
+from .gradient_descent import compute_gradient
 import numpy as np
 
 
@@ -28,7 +28,7 @@ def compute_stoch_gradient(y, tx, w):
     return compute_gradient(y, tx, w)
 
 
-def stochastic_gradient_descent(y, tx, initial_w, batch_size, max_iters, gamma):
+def stochastic_gradient_descent(y, tx, initial_w, batch_size, max_iters, gamma, show_process=False):
     """The Stochastic Gradient Descent algorithm (SGD).
 
     Args:
@@ -38,6 +38,7 @@ def stochastic_gradient_descent(y, tx, initial_w, batch_size, max_iters, gamma):
         batch_size: a scalar denoting the number of data points in a mini-batch used for computing the stochastic gradient
         max_iters: a scalar denoting the total number of iterations of SGD
         gamma: a scalar denoting the stepsize
+        show_process : prints the loss, the w0 and w1
 
     Returns:
         losses: a list of length max_iters containing the loss value (scalar) for each iteration of SGD
@@ -64,9 +65,11 @@ def stochastic_gradient_descent(y, tx, initial_w, batch_size, max_iters, gamma):
         loss = np.mean(loss_batch) # compute mean loss over all minibatches
         losses.append(loss)
         ws.append(w)
-        print(
-            "SGD iter. {bi}/{ti}: loss={l}, w0={w0}, w1={w1}".format(
-                bi=n_iter, ti=max_iters - 1, l=loss, w0=w[0], w1=w[1]
+        
+        if show_process:
+            print(
+                "SGD iter. {bi}/{ti}: loss={l}, w0={w0}, w1={w1}".format(
+                    bi=n_iter, ti=max_iters - 1, l=loss, w0=w[0], w1=w[1]
+                )
             )
-        )
     return losses, ws

@@ -5,7 +5,7 @@ Grid Search
 """
 
 import numpy as np
-from costs import compute_loss
+from .costs import compute_loss
 
 
 def generate_w(num_intervals):
