@@ -5,6 +5,7 @@ Least Square
 """
 
 import numpy as np
+import costs
 
 
 def least_squares(y, tx):
@@ -23,8 +24,12 @@ def least_squares(y, tx):
     (array([ 0.21212121, -0.12121212]), 8.666684749742561e-33)
     """
     # ***************************************************
-    # COPY YOUR CODE FROM EX03 HERE
+    # INSERT YOUR CODE HERE
     # least squares: TODO
-    # returns optimal weights, MSE
+    # returns mse, and optimal weights
     # ***************************************************
-    raise NotImplementedError
+    A = tx.T @ tx
+    b = tx.T @ y
+    w = np.linalg.solve(A, b)
+
+    return w, float(costs.compute_mse(y, tx, w))
